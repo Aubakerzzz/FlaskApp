@@ -30,7 +30,7 @@ jobs:
 
       - name: Package app
         run: |
-          zip -r app.zip * .[^.]*
+          zip -r app.zip * .[^.]* -x "*.git*"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -54,8 +54,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: "FlaskApp"
-          environment_name: "FlaskApp-env"
-          region: "eu-north-1"
+          application_name: ${{ secrets.EB_APP_NAME }}
+          environment_name: ${{ secrets.EB_ENV_NAME }}
+          region: ${{ secrets.AWS_REGION }}
           version_label: github-${{ github.sha }}
           deployment_package: app.zip
