@@ -59,3 +59,4 @@ jobs:
           region: ${{ secrets.AWS_REGION }}
           version_label: github-${{ github.sha }}
           deployment_package: app.zip
+          
